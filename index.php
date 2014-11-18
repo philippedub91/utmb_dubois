@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>UTMB</title>
-		<?php 
-			 $enregistre = false;
-		?>
+
+		<?php include('ajouterCentreTraitements.php'); ?>
+
 	</head>
 	<body style="margin:0px; font-family:arial;">
 		<header style="background-color:rgb(92, 154, 236);">
@@ -33,10 +33,13 @@
 						<br />
 
 						<label for="lst_plage">Plage horaire :</label>
-						<select name="lst_plage">
-							<option value="matin">Matin</option>
-							<option value="am">Après-Midi</option>
+						<select name="lst_plageDebut">
+							<option value="Du vendredi matin au samedi après-midi">Du vendredi matin au samedi après-midi</option>
+							<option value="Du vendredi après-midi au "
 						</select>
+
+						<select name="lst_plageFin">
+							<option value="matin">
 
 						<br />
 						<br />
