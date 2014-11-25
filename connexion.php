@@ -28,7 +28,7 @@
 		if(isset($_POST['txt_mdp']) && !empty($_POST['txt_mdp']))
 		{
 			//Connexion à la base de données
-			$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+			$con = mysqli_connect('localhost', 'root', '', 'utmb');
 
 			//Ecriture, preparation et envoi de la requete
 			$sql_verif = ('SELECT count(*) FROM BENEVOLE WHERE login = ? AND mdp = ?');
@@ -62,7 +62,7 @@
 
 			if(isset($verif) && $verif == true)
 			{
-				//$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+				//$con = mysqli_connect('localhost', 'root', '', 'utmb');
 				$sql_connect = 'SELECT idBenevole, login, nom, prenom FROM BENEVOLE WHERE login= ? AND mdp= ?';
 				$result_connect = mysqli_prepare($con, $sql_connect);
 				$ok_connect = mysqli_stmt_bind_param($result_connect, 'ss', $login, $mdp);

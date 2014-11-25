@@ -19,13 +19,13 @@
 		</header>
 
 		<nav>
-			<?php //include('menu.php'); ?>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre">
 			<?php
 				//Connexion à la base
-				$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+				$con = mysqli_connect('localhost', 'root', '', 'utmb');
 				$requete = 'SELECT idCompetence, libelleCompetence FROM COMPETENCE';
 
 				//Envoi de la requete

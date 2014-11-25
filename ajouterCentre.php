@@ -51,7 +51,7 @@
 					if(is_numeric($_POST['txt_poste1']) && is_numeric($_POST['txt_poste2']) && is_numeric($_POST['txt_poste3']) && is_numeric($_POST['txt_poste4']))
 					{
 						//Connexion à la base, préparation et envoie de la requete
-						$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+						$con = mysqli_connect('localhost', 'root', 'tvn595', 'utmb');
 						$sql_centre = 'INSERT INTO CENTRE (libelleCentre, plageHoraireCentre) VALUES(?,?)';
 						$requete = mysqli_prepare($con, $sql_centre);
 						$ok = mysqli_stmt_bind_param($requete, 'ss', $libelle, $plage);
@@ -102,7 +102,7 @@
 		</header>
 
 		<nav>
-			<?php //include('menu.php'); ?>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre">

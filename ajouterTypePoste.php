@@ -46,7 +46,7 @@
 		if(!empty($_POST['txt_TypePoste']) && !empty($_POST['txt_revenuTypePoste']))
 		{
 			//Connexion à la base, préparation et envoie de la requete
-			$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+			$con = mysqli_connect('localhost', 'root', '', 'utmb');
 			$sql = 'INSERT INTO TYPEPOSTE (libelleTypePoste, interetPoste) VALUES (?,?)';
 			$requete = mysqli_prepare($con, $sql);
 			$ok = mysqli_stmt_bind_param($requete, 'ss', $libelle, $interet);
@@ -87,7 +87,7 @@
 		</header>
 
 		<nav>
-			<?php //include('menu.php'); ?>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre">

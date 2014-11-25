@@ -18,7 +18,7 @@
 		</header>
 
 		<nav>
-			<a href="index.php">Accueil</a>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre">
@@ -37,7 +37,7 @@
 							<select name="lst_poste">
 								<?php
 									//Affiche la liste des postes
-									$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+									$con = mysqli_connect('localhost', 'root', '', 'utmb');
 									$sql_lst = 'SELECT idTypePoste, libelleTypePoste FROM TYPEPOSTE';
 									$resultat_lst = mysqli_query($con, $sql_lst);
 									while($ligne = mysqli_fetch_assoc($resultat_lst))
@@ -46,7 +46,6 @@
 										<option value="<?php echo($ligne['idTypePoste']);?>"><?php echo($ligne['libelleTypePoste']);?></option>
 								<?php
 									}
-									mysqli_close($resultat_lst);
 								?>
 							</select>
 						</td>

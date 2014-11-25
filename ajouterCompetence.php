@@ -45,7 +45,7 @@
 				if(!is_numeric($_POST['txt_code']))
 				{
 					//Connexion à la base et envoi de la requete
-					$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+					$con = mysqli_connect('localhost', 'root', '', 'utmb');
 					$sql = 'INSERT INTO COMPETENCE(idCompetence, libelleCompetence) VALUES (?,?)';
 					$requete = mysqli_prepare($con, $sql);
 					$ok = mysqli_stmt_bind_param($requete, 'ss', $code, $libelle);
@@ -92,7 +92,7 @@
 		</header>
 
 		<nav>
-			<?php //include('menu.php'); ?>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre" style="text-align:center;">

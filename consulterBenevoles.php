@@ -19,7 +19,7 @@
 		</header>
 
 		<nav>
-			<a href="index.php">Accueil</a>
+			<a href="index.php">< Retourner au menu</a>
 		</nav>
 
 		<section class="centre">
@@ -46,7 +46,7 @@
 			<?php
 				if(isset($_POST['txt_code']))
 				{
-					$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+					$con = mysqli_connect('localhost', 'root', '', 'utmb');
 					$sql = 'SELECT * FROM BENEVOLE WHERE idBenevole='.$_POST['txt_code'];
 					$resultat = mysqli_query($con, $sql);
 					if($resultat == false)
