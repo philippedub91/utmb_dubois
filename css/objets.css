@@ -1,0 +1,64 @@
+#form_txt
+{
+	font-size:			15px;
+	color:				rgb(86, 162, 214);
+
+	border-style:		solid;
+	border-color:		rgb(86, 162, 214);
+	border-width:		2px;
+}
+
+#form_txt:focus
+{
+	border-color:		rgb(1, 54, 104);
+	color:				rgb(1, 54, 104);
+}
+
+#form_btn
+{
+	font-size:			20px;
+	color:				white;
+	background-color:	rgb(86, 162, 214);
+
+	width:				175px;
+	border-style:		none;
+}
+
+#form_btn:hover
+{
+	background-color:	rgb(1, 54, 104);
+}
+
+#msg_add
+{
+	padding:			5px;
+	border-style:		solid;
+	border-width:		1px;
+	color:				white;
+
+	border-color:		rgb(0, 102, 51);
+	background-color:	rgb(0, 153, 76);
+}
+#msg_err
+{
+	padding:			5px;
+	border-style:		solid;
+	border-width:		1.5px;
+	color:				white;
+
+	border-color:		rgb(204, 0, 0);
+	background-color:	rgb(255, 0, 0);
+}
+
+
+a
+{
+	color:				rgb(86, 162, 214);
+	text-decoration:	underline;
+}
+
+a:hover
+{
+	text-decoration:	none;
+}
+
