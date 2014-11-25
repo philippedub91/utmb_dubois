@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.5
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Client :  localhost:8889
--- Généré le :  Mar 25 Novembre 2014 à 02:00
--- Version du serveur :  5.5.38
--- Version de PHP :  5.5.14
+-- Client :  127.0.0.1
+-- Généré le :  Mar 25 Novembre 2014 à 10:15
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de données :  `utmb`
@@ -17,11 +23,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `BENEVOLE`
+-- Structure de la table `benevole`
 --
 
-CREATE TABLE `BENEVOLE` (
-`idBenevole` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `benevole` (
+  `idBenevole` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `login` varchar(250) NOT NULL,
   `mdp` varchar(250) NOT NULL,
   `nom` varchar(50) NOT NULL,
@@ -40,34 +46,38 @@ CREATE TABLE `BENEVOLE` (
   `niveauRando` int(11) DEFAULT NULL,
   `niveauInfo` int(11) DEFAULT NULL,
   `idTypePoste` int(10) unsigned DEFAULT NULL,
-  `idCentre` int(10) unsigned DEFAULT NULL
+  `idCentre` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`idBenevole`),
+  KEY `idTypePoste` (`idTypePoste`),
+  KEY `idCentre` (`idCentre`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Contenu de la table `BENEVOLE`
+-- Contenu de la table `benevole`
 --
 
-INSERT INTO `BENEVOLE` (`idBenevole`, `login`, `mdp`, `nom`, `prenom`, `adresse`, `codePostal`, `ville`, `pays`, `telephone`, `courriel`, `sexe`, `dateNaissance`, `taille`, `permisConduire`, `diplomeSecouriste`, `niveauRando`, `niveauInfo`, `idTypePoste`, `idCentre`) VALUES
+INSERT INTO `benevole` (`idBenevole`, `login`, `mdp`, `nom`, `prenom`, `adresse`, `codePostal`, `ville`, `pays`, `telephone`, `courriel`, `sexe`, `dateNaissance`, `taille`, `permisConduire`, `diplomeSecouriste`, `niveauRando`, `niveauInfo`, `idTypePoste`, `idCentre`) VALUES
 (1, 'gberger', '873e44861121144eed2c63beb170b14f0a02f5e6', 'Berger', 'Gaston', 'Avenue Gaston Berger', '59000', 'LILLE', 'FRANCE', '0320493159', 'gaston@gastonberger.fr', 'M', '1896-10-01', 'M', 1, 0, 1, 2, 3, 1),
 (2, '', '', 'toto', 'titi', NULL, NULL, NULL, '', '0312345678', 'toto@gmail.fr', 'M', '1994-10-01', 'M', 0, 0, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `CENTRE`
+-- Structure de la table `centre`
 --
 
-CREATE TABLE `CENTRE` (
-`idCentre` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `centre` (
+  `idCentre` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `libelleCentre` varchar(50) NOT NULL,
-  `plageHoraireCentre` varchar(100) NOT NULL
+  `plageHoraireCentre` varchar(100) NOT NULL,
+  PRIMARY KEY (`idCentre`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
--- Contenu de la table `CENTRE`
+-- Contenu de la table `centre`
 --
 
-INSERT INTO `CENTRE` (`idCentre`, `libelleCentre`, `plageHoraireCentre`) VALUES
+INSERT INTO `centre` (`idCentre`, `libelleCentre`, `plageHoraireCentre`) VALUES
 (1, 'Organisation Centrale / Chamonix /', 'du vendredi après-midi au dimanche après-midi'),
 (2, 'Les Houches ', 'vendredi après-midi et soirée'),
 (3, 'Saint Gervais ', 'vendredi après-midi et soirée'),
@@ -86,24 +96,24 @@ INSERT INTO `CENTRE` (`idCentre`, `libelleCentre`, `plageHoraireCentre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `COMPETENCE`
+-- Structure de la table `competence`
 --
 
-CREATE TABLE `COMPETENCE` (
+CREATE TABLE IF NOT EXISTS `competence` (
   `idCompetence` char(3) NOT NULL DEFAULT '',
-  `libelleCompetence` varchar(100) NOT NULL
+  `libelleCompetence` varchar(100) NOT NULL,
+  PRIMARY KEY (`idCompetence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `COMPETENCE`
+-- Contenu de la table `competence`
 --
 
-INSERT INTO `COMPETENCE` (`idCompetence`, `libelleCompetence`) VALUES
+INSERT INTO `competence` (`idCompetence`, `libelleCompetence`) VALUES
 ('AAE', 'Etre à son aise avec les appareils électroniques'),
 ('ATE', 'Aimer travailler en équipe'),
 ('BCP', 'Bonne condition physique '),
 ('DSE', 'Diplôme de secourisme'),
-('EAA', 'Etre un audio animatronic'),
 ('ESE', 'Avoir une expérience du secours'),
 ('ESP', 'Esprit pratique '),
 ('FSE', 'Si possible être déjà intégré à une formation de secours:pisteur, pompier, gendarme, Croix- rouge…  '),
@@ -116,20 +126,22 @@ INSERT INTO `COMPETENCE` (`idCompetence`, `libelleCompetence`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `EXIGE`
+-- Structure de la table `exige`
 --
 
-CREATE TABLE `EXIGE` (
+CREATE TABLE IF NOT EXISTS `exige` (
   `idTypePoste` int(10) unsigned NOT NULL DEFAULT '0',
   `idCentre` int(10) unsigned NOT NULL DEFAULT '0',
-  `nbBenevole` int(11) NOT NULL
+  `nbBenevole` int(11) NOT NULL,
+  PRIMARY KEY (`idTypePoste`,`idCentre`),
+  KEY `idCentre` (`idCentre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `EXIGE`
+-- Contenu de la table `exige`
 --
 
-INSERT INTO `EXIGE` (`idTypePoste`, `idCentre`, `nbBenevole`) VALUES
+INSERT INTO `exige` (`idTypePoste`, `idCentre`, `nbBenevole`) VALUES
 (1, 1, 26),
 (1, 2, 2),
 (1, 3, 2),
@@ -178,19 +190,21 @@ INSERT INTO `EXIGE` (`idTypePoste`, `idCentre`, `nbBenevole`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `NECESSITE`
+-- Structure de la table `necessite`
 --
 
-CREATE TABLE `NECESSITE` (
+CREATE TABLE IF NOT EXISTS `necessite` (
   `idTypePoste` int(10) unsigned NOT NULL DEFAULT '0',
-  `idCompetence` char(3) NOT NULL
+  `idCompetence` char(3) NOT NULL,
+  PRIMARY KEY (`idTypePoste`,`idCompetence`),
+  KEY `idCompetence` (`idCompetence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `NECESSITE`
+-- Contenu de la table `necessite`
 --
 
-INSERT INTO `NECESSITE` (`idTypePoste`, `idCompetence`) VALUES
+INSERT INTO `necessite` (`idTypePoste`, `idCompetence`) VALUES
 (3, 'AAE'),
 (1, 'ATE'),
 (4, 'ATE'),
@@ -210,125 +224,68 @@ INSERT INTO `NECESSITE` (`idTypePoste`, `idCompetence`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `SOUHAIT`
+-- Structure de la table `souhait`
 --
 
-CREATE TABLE `SOUHAIT` (
+CREATE TABLE IF NOT EXISTS `souhait` (
   `idBenevole` int(11) NOT NULL,
   `idCentre` int(11) NOT NULL,
-  `idTypePoste` int(11) NOT NULL
+  `idTypePoste` int(11) NOT NULL,
+  PRIMARY KEY (`idBenevole`,`idCentre`,`idTypePoste`),
+  KEY `idBenevole` (`idBenevole`),
+  KEY `idCentre` (`idCentre`),
+  KEY `idTypePoste` (`idTypePoste`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `TYPEPOSTE`
+-- Structure de la table `typeposte`
 --
 
-CREATE TABLE `TYPEPOSTE` (
-`idTypePoste` int(10) unsigned NOT NULL,
+CREATE TABLE IF NOT EXISTS `typeposte` (
+  `idTypePoste` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `libelleTypePoste` varchar(50) NOT NULL,
-  `interetPoste` varchar(100) DEFAULT NULL
+  `interetPoste` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idTypePoste`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Contenu de la table `TYPEPOSTE`
+-- Contenu de la table `typeposte`
 --
 
-INSERT INTO `TYPEPOSTE` (`idTypePoste`, `libelleTypePoste`, `interetPoste`) VALUES
+INSERT INTO `typeposte` (`idTypePoste`, `libelleTypePoste`, `interetPoste`) VALUES
 (1, 'Equipe technique', 'Etre plongé au cœur de l’organisation. Vivre l’évènement dans ses différentes facettes'),
 (2, 'Secours', 'Un poste en pleine nature pour contribuer à assurer la sécurité de tous'),
 (3, 'Contrôle informatique', 'Participer à un challenge technologique qui permet à des milliers d’internautes de suivre la course '),
 (4, 'Ravitaillement', 'Un poste en pleine nature pour assurer le premier des services attendus par les coureurs'),
-(5, 'OpÃ©rateur attraction', 'Fait fonctionner les attractions. Se charge de la vÃ©rification de la de sÃ©curitÃ©, contrÃ´le la ca'),
 (6, 'Autre', 'Ajout d''un autre');
 
---
--- Index pour les tables exportées
---
-
---
--- Index pour la table `BENEVOLE`
---
-ALTER TABLE `BENEVOLE`
- ADD PRIMARY KEY (`idBenevole`), ADD KEY `idTypePoste` (`idTypePoste`), ADD KEY `idCentre` (`idCentre`);
-
---
--- Index pour la table `CENTRE`
---
-ALTER TABLE `CENTRE`
- ADD PRIMARY KEY (`idCentre`);
-
---
--- Index pour la table `COMPETENCE`
---
-ALTER TABLE `COMPETENCE`
- ADD PRIMARY KEY (`idCompetence`);
-
---
--- Index pour la table `EXIGE`
---
-ALTER TABLE `EXIGE`
- ADD PRIMARY KEY (`idTypePoste`,`idCentre`), ADD KEY `idCentre` (`idCentre`);
-
---
--- Index pour la table `NECESSITE`
---
-ALTER TABLE `NECESSITE`
- ADD PRIMARY KEY (`idTypePoste`,`idCompetence`), ADD KEY `idCompetence` (`idCompetence`);
-
---
--- Index pour la table `SOUHAIT`
---
-ALTER TABLE `SOUHAIT`
- ADD PRIMARY KEY (`idBenevole`,`idCentre`,`idTypePoste`), ADD KEY `idBenevole` (`idBenevole`), ADD KEY `idCentre` (`idCentre`), ADD KEY `idTypePoste` (`idTypePoste`);
-
---
--- Index pour la table `TYPEPOSTE`
---
-ALTER TABLE `TYPEPOSTE`
- ADD PRIMARY KEY (`idTypePoste`);
-
---
--- AUTO_INCREMENT pour les tables exportées
---
-
---
--- AUTO_INCREMENT pour la table `BENEVOLE`
---
-ALTER TABLE `BENEVOLE`
-MODIFY `idBenevole` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT pour la table `CENTRE`
---
-ALTER TABLE `CENTRE`
-MODIFY `idCentre` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
---
--- AUTO_INCREMENT pour la table `TYPEPOSTE`
---
-ALTER TABLE `TYPEPOSTE`
-MODIFY `idTypePoste` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `BENEVOLE`
+-- Contraintes pour la table `benevole`
 --
-ALTER TABLE `BENEVOLE`
-ADD CONSTRAINT `benevole_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `TYPEPOSTE` (`idTypePoste`),
-ADD CONSTRAINT `benevole_ibfk_2` FOREIGN KEY (`idCentre`) REFERENCES `CENTRE` (`idCentre`);
+ALTER TABLE `benevole`
+  ADD CONSTRAINT `benevole_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `typeposte` (`idTypePoste`),
+  ADD CONSTRAINT `benevole_ibfk_2` FOREIGN KEY (`idCentre`) REFERENCES `centre` (`idCentre`);
 
 --
--- Contraintes pour la table `EXIGE`
+-- Contraintes pour la table `exige`
 --
-ALTER TABLE `EXIGE`
-ADD CONSTRAINT `exige_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `TYPEPOSTE` (`idTypePoste`),
-ADD CONSTRAINT `exige_ibfk_2` FOREIGN KEY (`idCentre`) REFERENCES `CENTRE` (`idCentre`);
+ALTER TABLE `exige`
+  ADD CONSTRAINT `exige_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `typeposte` (`idTypePoste`),
+  ADD CONSTRAINT `exige_ibfk_2` FOREIGN KEY (`idCentre`) REFERENCES `centre` (`idCentre`);
 
 --
--- Contraintes pour la table `NECESSITE`
+-- Contraintes pour la table `necessite`
 --
-ALTER TABLE `NECESSITE`
-ADD CONSTRAINT `necessite_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `TYPEPOSTE` (`idTypePoste`),
-ADD CONSTRAINT `necessite_ibfk_2` FOREIGN KEY (`idCompetence`) REFERENCES `COMPETENCE` (`idCompetence`);
+ALTER TABLE `necessite`
+  ADD CONSTRAINT `necessite_ibfk_1` FOREIGN KEY (`idTypePoste`) REFERENCES `typeposte` (`idTypePoste`),
+  ADD CONSTRAINT `necessite_ibfk_2` FOREIGN KEY (`idCompetence`) REFERENCES `competence` (`idCompetence`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
