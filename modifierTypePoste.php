@@ -102,25 +102,9 @@
 
 			<hr>
 
-			<form method="POST" action="ajouterTypePoste.php">
-				<table style="margin-left:auto; margin-right:auto;">
-					<tr>
-						<td><label for="txt_TypePoste">Libellé :</label></td>
-						<td><input type="text" name="txt_TypePoste" id="form_txt"></td>
-					</tr>
-					<tr>
-						<td><label for="txt_revenuTypePoste">Interêt :</label></td>
-						<td>
-							<textarea name="txt_revenuTypePoste" id="form_txt" rows="10" cols="22"></textarea>
-						</td>
-					</tr>
-
-					<tr>
-						<td><!--vide--></td>
-						<td><input type="SUBMIT" name="btn_ok" id="form_btn" value="Valider"></td></td>
-					</tr>
-				</table>
-			</form>
+			<table>
+				<form method="POST" action="modifierTypePoste.php">
+				
 		</section>
 	</body>
 </html>

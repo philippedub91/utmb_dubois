@@ -1,6 +1,9 @@
 <?php
 	session_start();
 
+	//Connexion à la base de données
+	require('connexion_bdd.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +28,6 @@
 		<section class="centre">
 			<?php
 				//Connexion à la base
-				$con = mysqli_connect('localhost', 'root', '', 'utmb');
 				$requete = 'SELECT idCompetence, libelleCompetence FROM COMPETENCE';
 
 				//Envoi de la requete

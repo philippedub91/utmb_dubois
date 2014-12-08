@@ -1,6 +1,6 @@
 <?php
 	session_start();
-
+	
 	//Vérifie si un l'utilisateur est déjà connecté
 	if(isset($_SESSION['connecte']))
 	{

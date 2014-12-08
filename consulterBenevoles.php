@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	//Connexon à la base de données
+	require('connexion_bdd.php');
 ?>
 
 
@@ -46,7 +48,6 @@
 			<?php
 				if(isset($_POST['txt_code']))
 				{
-					$con = mysqli_connect('localhost', 'root', '', 'utmb');
 					$sql = 'SELECT * FROM BENEVOLE WHERE idBenevole='.$_POST['txt_code'];
 					$resultat = mysqli_query($con, $sql);
 					if($resultat == false)

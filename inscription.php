@@ -1,5 +1,9 @@
 <?php
 	session_start();
+
+	//Connexion à la base de données
+	require('connexion_bdd.php');
+	
 	if(isset($_SESSION['connection']) && $_SESSION['connecte'] == true)
 	{
 		header('Location: index.php');

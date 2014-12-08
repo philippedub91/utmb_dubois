@@ -1,6 +1,9 @@
 <?php
 	session_start();
 
+	//Connexion à la base de données
+	require('connexion_bdd.php');
+
 	//Vérifie s'il y a un message à afficher
 	//Message d'erreur
 	if(isset($_GET['err']))
@@ -45,29 +48,51 @@
 	//Vérifie si tous les champs sont saisis
 	if(isset($_POST['lst_centre']) && isset($_POST['lst_poste']))
 	{
-		//Connexion à la base
-		$con = mysqli_connect('localhost', 'root', '', 'utmb');
+		$sql_nb = 'SELECT count(*) FROM BENEVOLE WHERE idBenevole = ?';
+		$resultat_benevole = mysqli_prepare($con, $sql_nb);
+		$ok = mysqli_stmt_bind_param($resultat_benevole, 'i', $idBenevole);
 
-		//Préparation de la requete
-		$sql = 'UPDATE SET idTypePoste = ?, idCentre = ? WHERE idBenevole = ?';
-		$requete = mysqli_prepare($con, $sql);
-		$ok = mysqli_stmt_bind_param($requete, 'iii', $idTypePoste, $idCentre, $idBenevole);
 		$idTypePoste = $_POST['lst_poste'];
 		$idCentre = $_POST['lst_poste'];
 		$idBenevole = $_SESSION['idBenevole'];
 
-		//Envoi de la requete
-		$ok = mysqli_stmt_execute($requete);
-		if($ok == false)
+		while($ligne = mysqli_fetch_assoc($resultat_benevole))
 		{
-			header('Location: emettreSouhaits.php?err=3&q='.$sql);
-		}
-		else
-		{
-			header('Location: emettreSouhaits.php?add=1');
-		}
+			if($ligne[0] == 1)
+			{
+				$sql_upt = 'UPDATE SOUHAIT SET idCentre = ?, idTypePoste = ? WHERE idBenevole = ?';
+				$requete_upt = mysqli_prepare($con, $sql_upt);
+				$ok = mysqli_stmt_bind_param($requete_upt, 'iii', $idCentre, $idTypePoste, $idBenevole);
+				$ok = mysqli_stmt_execute($requete);
+				if($ok == false)
+				{
+					header('Location: emettreSouhaits.php?err=3&q='.$sql_upt);
+				}
+				else
+				{
+					header('Location: emettreSouhaits.php?add=1');
+				}
 
-		mysqli_stmt_close($requete);
+				mysqli_stmt_close($requete_upt);
+			}
+			else
+			{
+				$sql_insert = 'INSERT INTO SOUHAIT (idBenevole, idCentre, idTypePoste) VALUES (?, ?, ?)';
+				$requete_insert = mysqli_prepare($con, $sql_insert);
+				$ok = mysqli_stmt_bind_param($requete_insert, 'iii', $idBenevole, $idCentre, $idTypePoste);
+				$ok = mysqli_stmt_execute($requete_insert);
+				if($ok == false)
+				{
+					header('Location: emettreSouhaits.php?err=3&q='.$sql_insert);
+				}
+				else
+				{
+					header('Location: emettreSouhaits.php?add=1');
+				}
+
+				mysqli_stmt_close($requete_insert);
+			}
+		}
 	}
 ?>
 
@@ -142,6 +167,10 @@
 					<tr>
 						<td><!--vide--></td>
 						<td><input type="SUBMIT" name="btn_ok" id="form_btn" value="Valider"></td>
+					</tr>
+					<tr>
+						<td><!--vide--></td>
+						<td><a href="index.php">[retourner au menu]</a></td>
 					</tr>
 				</table>
 		</section>

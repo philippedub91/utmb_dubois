@@ -1,6 +1,9 @@
 <?php
 	session_start();
 
+	//Connexion à la base de données
+	require('connexion_bdd.php');
+
 	//Vérifie si un l'utilisateur est déjà connecté
 	if(isset($_SESSION['connecte']))
 	{
@@ -27,9 +30,6 @@
 	{
 		if(isset($_POST['txt_mdp']) && !empty($_POST['txt_mdp']))
 		{
-			//Connexion à la base de données
-			$con = mysqli_connect('localhost', 'root', '', 'utmb');
-
 			//Ecriture, preparation et envoi de la requete
 			$sql_verif = ('SELECT count(*) FROM BENEVOLE WHERE login = ? AND mdp = ?');
 			$result_verif = mysqli_prepare($con, $sql_verif);

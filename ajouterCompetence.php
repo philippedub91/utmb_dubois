@@ -1,5 +1,8 @@
 -<?php
 	session_start();
+	
+	//Permet de se connecter à la base de données
+	require_once('connexion_bdd.php');
 
 	//Si il une erreur est rencontrée
 	if(isset($_GET['err']))
@@ -45,7 +48,6 @@
 				if(!is_numeric($_POST['txt_code']))
 				{
 					//Connexion à la base et envoi de la requete
-					$con = mysqli_connect('localhost', 'root', '', 'utmb');
 					$sql = 'INSERT INTO COMPETENCE(idCompetence, libelleCompetence) VALUES (?,?)';
 					$requete = mysqli_prepare($con, $sql);
 					$ok = mysqli_stmt_bind_param($requete, 'ss', $code, $libelle);

@@ -1,5 +1,8 @@
 <?php
 	session_start();
+
+	//Connexion à la base de données
+	require('connexion_bdd.php');
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +40,6 @@
 							<select name="lst_poste">
 								<?php
 									//Affiche la liste des postes
-									$con = mysqli_connect('localhost', 'root', '', 'utmb');
 									$sql_lst = 'SELECT idTypePoste, libelleTypePoste FROM TYPEPOSTE';
 									$resultat_lst = mysqli_query($con, $sql_lst);
 									while($ligne = mysqli_fetch_assoc($resultat_lst))
