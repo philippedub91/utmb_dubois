@@ -43,6 +43,15 @@
 			}
 		?>
 
+		<?php
+			$con = mysqli_connect('localhost:8888', 'utmb', 'tvn595', 'utmb');
+			$requete = 'SELECT * FROM BENEVOLE';
+			$sql = mysqli_query($requete);
+			while($ligne[] = mysqli_fetch($sql))
+			{
+				echo($ligne[]);
+			}
+		?>
 
 
 	</body>

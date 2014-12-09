@@ -1,3 +1,3 @@
 <?php
-	$con = mysqli_connect('localhost', 'root', '', 'utmb');
+	$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
 ?>

@@ -1,8 +1,20 @@
--<?php
+<?php
 	session_start();
 	
 	//Permet de se connecter à la base de données
 	require_once('connexion_bdd.php');
+
+	if(!isset($_SESSION['gestionnaire']))
+	{
+		if(isset($_SESSION['idBenevole']))
+		{
+			header('Location: index.php');
+		}
+		else
+		{
+			header('Location: index.php');
+		}
+	}
 
 	//Si il une erreur est rencontrée
 	if(isset($_GET['err']))

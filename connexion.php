@@ -30,6 +30,10 @@
 	{
 		if(isset($_POST['txt_mdp']) && !empty($_POST['txt_mdp']))
 		{
+
+			//Connexion à la base de données
+			$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
+
 			//Ecriture, preparation et envoi de la requete
 			$sql_verif = ('SELECT count(*) FROM BENEVOLE WHERE login = ? AND mdp = ?');
 			$result_verif = mysqli_prepare($con, $sql_verif);

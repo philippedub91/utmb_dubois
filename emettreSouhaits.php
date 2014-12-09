@@ -4,6 +4,11 @@
 	//Connexion à la base de données
 	require('connexion_bdd.php');
 
+	if(!isset($_SESSION['connecte']))
+	{
+		header('Location: connexion.php');
+	}
+
 	//Vérifie s'il y a un message à afficher
 	//Message d'erreur
 	if(isset($_GET['err']))
@@ -48,9 +53,13 @@
 	//Vérifie si tous les champs sont saisis
 	if(isset($_POST['lst_centre']) && isset($_POST['lst_poste']))
 	{
+
 		$sql_nb = 'SELECT count(*) FROM BENEVOLE WHERE idBenevole = ?';
 		$resultat_benevole = mysqli_prepare($con, $sql_nb);
 		$ok = mysqli_stmt_bind_param($resultat_benevole, 'i', $idBenevole);
+
+		//Connexion à la base
+		$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
 
 		$idTypePoste = $_POST['lst_poste'];
 		$idCentre = $_POST['lst_poste'];
@@ -133,7 +142,7 @@
 						<td><label for="lst_centre">Choisir un centre :</label></td>
 						<td>
 							<?php
-								$con = mysqli_connect('localhost', 'root', '', 'utmb');
+								$con = mysqli_connect('localhost', 'utmb', 'tvn595', 'utmb');
 								$sql_centre = 'SELECT idCentre, libelleCentre FROM CENTRE';
 								$resultat_centre = mysqli_query($con, $sql_centre);
 								echo('<select name="lst_centre">');

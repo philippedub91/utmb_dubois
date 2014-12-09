@@ -3,6 +3,11 @@
 
 	//Connexion à la base de données
 	require('connexion_bdd.php');
+
+	if(!isset($_SESSION['connecte']))
+	{
+		header('Location: connexion.php');
+	}
 ?>
 
 <!DOCTYPE html>

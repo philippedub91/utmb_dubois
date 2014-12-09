@@ -1,7 +1,26 @@
 <?php
 	session_start();
+<<<<<<< Updated upstream
 	//Connexon à la base de données
 	require('connexion_bdd.php');
+=======
+
+	/*
+	//Vérifie si l'utilisateur à les autorisations
+	//Sinon redirige vers l'index s'il est connecte ou sinon la page de connexion
+	if(!isset($_SESSION['gestionnaire']))
+	{
+		if(isset($_SESSION['idBenevole'])
+		{
+			header('Location: index.php');
+		}
+		else
+		{
+			header('Location: index.php');
+		}
+	}
+	*/
+>>>>>>> Stashed changes
 ?>
 
 

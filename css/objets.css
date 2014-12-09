@@ -31,10 +31,11 @@
 
 #msg_add
 {
-	padding:			5px;
+	padding:			2px;
 	border-style:		solid;
 	border-width:		1px;
 	color:				white;
+	font-size:			12px;
 
 	size:				8px;
 
@@ -47,6 +48,7 @@
 	border-style:		solid;
 	border-width:		1.5px;
 	color:				white;
+	font-size:			12px;
 
 	size:				8px;
 

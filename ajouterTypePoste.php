@@ -1,6 +1,18 @@
 <?php
 	session_start();
 
+	if(!isset($_SESSION['gestionnaire']))
+	{
+		if(isset($_SESSION['idBenevole']))
+		{
+			header('Location: index.php');
+		}
+		else
+		{
+			header('Location: index.php');
+		}
+	}
+
 	//Vérifie s'il y a des erreurs
 	if(isset($_GET['err']))
 	{

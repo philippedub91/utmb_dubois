@@ -4,6 +4,19 @@
 	//Connexion à la base de données
 	require('connexion_bdd.php');
 
+	//Vérifie si l'utilisateur à les autorisations
+	//Sinon le redirige soit vers l'index soit vers la page de connexion.
+	if(!isset($_SESSION['gestionnaire']))
+	{
+		if(isset($_SESSION['idBenevole']))
+		{
+			header('Location: index.php');
+		}
+		else
+		{
+			header('Location: index.php');
+		}
+	}
 ?>
 
 <!DOCTYPE html>

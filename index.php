@@ -55,8 +55,7 @@
 				<hr>
 
 				<ul>
-					<li><a href="modifierTypePoste.php">Modifier les Types de Postes</a></li>
-					<li><a href="associerCompetence.php">Associer les compétences</a></li>
+					<li><a href="associerCompetences.php">Associer les compétences</a></li>
 				</ul>
 
 				<hr>
